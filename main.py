@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 
 YEARS = [2023]
-DB_PATH = str(os.path.join(os.getenv("HOME"), ".nfl_data", "data", "fantasy_db.db"))
+DB_PATH = str(os.path.join(os.getenv("HOME"), ".nfl_data", "data", "fantasy_db.duckdb"))
 
 
 def fetch_pbp_data(years):
