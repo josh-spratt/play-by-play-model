@@ -31,3 +31,6 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   play_by_play_model:
+    +persist_docs:
+      relation: true
+      columns: true

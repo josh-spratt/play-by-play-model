@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: fantasy_db
+    database: fantasy_db  
+    schema: main  
+    tables:
+      - name: play_by_play_2023
+  
