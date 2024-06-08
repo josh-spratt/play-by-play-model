@@ -9,7 +9,9 @@ DB_PATH = str(os.path.join(os.getenv("HOME"), ".nfl_data", "data", "fantasy_db.d
 
 def fetch_pbp_data(years):
     print(f"> Fetching play by play data for {years} {datetime.now().isoformat()}")
-    play_by_play_df = nfl.import_pbp_data(years, downcast=True, cache=False, alt_path=None)
+    play_by_play_df = nfl.import_pbp_data(
+        years, downcast=True, cache=False, alt_path=None
+    )
     print(f"> Retrieved play by play data for {years} {datetime.now().isoformat()}")
     return play_by_play_df
 

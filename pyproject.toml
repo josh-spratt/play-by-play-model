@@ -13,6 +13,10 @@ duckdb = "1.0.0"
 dbt-duckdb = "^1.8.1"
 
 
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.4"
+black = "^24.4.2"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
