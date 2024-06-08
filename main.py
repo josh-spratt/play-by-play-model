@@ -1,3 +1,4 @@
+#%%
 import nfl_data_py as nfl
 import duckdb
 from datetime import datetime
@@ -41,11 +42,6 @@ def create_table(conn, table_name):
     conn.sql(query)
 
 
-def load_table(conn, table_name):
-    query = f"INSERT INTO {table_name} SELECT * FROM data;"
-    conn.sql(query)
-
-
 def fetch_data(name: str, python_callable: callable, kwargs: dict):
     print(f"> Fetching {name} data {datetime.now().isoformat()}")
     data = python_callable(**kwargs)
@@ -56,10 +52,9 @@ def fetch_data(name: str, python_callable: callable, kwargs: dict):
 def put_data(conn, table_name):
     drop_table_if_exists(conn, table_name)
     create_table(conn, table_name)
-    load_table(conn, table_name)
 
 
-def update_table(conn, table_name, python_callable, kwargs):
+def update_table(conn, table_name, python_callable, kwargs={}):
     print("=" * 8, "Updating", table_name, "=" * (40 - len(table_name)))
     data = fetch_data(table_name, python_callable, kwargs)
     put_data(conn, table_name)
