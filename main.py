@@ -16,6 +16,13 @@ def fetch_pbp_data(years):
     return play_by_play_df
 
 
+def fetch_player_data():
+    print(f"> Fetching player data {datetime.now().isoformat()}")
+    player_df = nfl.import_players()
+    print(f"> Retrieved player data{datetime.now().isoformat()}")
+    return player_df
+
+
 def connect_to_db(file_path):
     if os.path.exists(str(os.path.join(os.getenv("HOME"), ".nfl_data", "data"))):
         print(f"Found .nfl_data directory")
@@ -58,6 +65,13 @@ def load_table(conn, table_name):
 def main():
     table_name = "play_by_play_2023"
     df = fetch_pbp_data(years=YEARS)
+    conn = connect_to_db(file_path=DB_PATH)
+    drop_table_if_exists(conn=conn, table_name=table_name)
+    create_table(conn=conn, table_name=table_name)
+    load_table(conn=conn, table_name=table_name)
+
+    table_name = "player_data"
+    df = fetch_player_data()
     conn = connect_to_db(file_path=DB_PATH)
     drop_table_if_exists(conn=conn, table_name=table_name)
     create_table(conn=conn, table_name=table_name)
