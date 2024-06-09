@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: base_player_dim
+    description: Player data and attributes
+    columns:
+      - name: player_id
+        description: Unique id for player used to join to other dimensions and facts
+      - name: full_name
+        description: Full first and last name of player
+      - name: first_name
+        description: First name of player
+      - name: last_name
+        description: Last name of player
+      - name: suffix
+        description: Suffix of player's name (Jr, Sr, etc)
+      - name: short_name
+        description: Players first initial and last name (Antonio Brown -> A.Brown)
+      - name: birth_date
+        description: Player's date of birth
+      - name: college_name
+        description: Name of the college the player attended
+      - name: position_group
+        description: Over arching group of player's position
+      - name: position
+        description: Player's subposition within the position_group
+      - name: jersey_number
+        description: Player's jersey number
+      - name: height
+        description: Height of player
+      - name: weight
+        description: Weight of Player
+      - name: years_of_experience
+        description: Number of years the player has been in the league
+      - name: team_id
+        description: Unique identifier of the player's team
+      - name: headshot_url
+        description: URL containing an image of the players headshot
+      - name: rookie_year
+        description: Player's first year in the league
+      - name: draft_team_abbr
+        description: Abbreviation of the team which drafted the player
+      - name: draft_number
+        description: Overall pick number from the players draft year
+      - name: college_conference
+        description: Conference of the college which the player attended
+      - name: status
+        description: Three letter code for current status of player
+      - name: status_description_abbr
+        description: Abbreviated description of players status
+      - name: status_short_description
+        description: Short description of player's status
