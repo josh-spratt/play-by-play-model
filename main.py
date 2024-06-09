@@ -7,22 +7,6 @@ YEARS = [2023]
 DB_PATH = str(os.path.join(os.getenv("HOME"), ".nfl_data", "data", "fantasy_db.duckdb"))
 
 
-def fetch_pbp_data(years):
-    print(f"> Fetching play by play data for {years} {datetime.now().isoformat()}")
-    play_by_play_df = nfl.import_pbp_data(
-        years, downcast=True, cache=False, alt_path=None
-    )
-    print(f"> Retrieved play by play data for {years} {datetime.now().isoformat()}")
-    return play_by_play_df
-
-
-def fetch_player_data():
-    print(f"> Fetching player data {datetime.now().isoformat()}")
-    player_df = nfl.import_players()
-    print(f"> Retrieved player data{datetime.now().isoformat()}")
-    return player_df
-
-
 def connect_to_db(file_path):
     if os.path.exists(str(os.path.join(os.getenv("HOME"), ".nfl_data", "data"))):
         print(f"Found .nfl_data directory")
@@ -52,30 +36,44 @@ def drop_table_if_exists(conn, table_name):
 
 
 def create_table(conn, table_name):
-    query = f"CREATE TABLE {table_name} AS SELECT * FROM df;"
+    query = f"CREATE TABLE {table_name} AS SELECT * FROM data;"
     print(query)
     conn.sql(query)
 
 
-def load_table(conn, table_name):
-    query = f"INSERT INTO {table_name} SELECT * FROM df;"
-    conn.sql(query)
+def fetch_data(name: str, python_callable: callable, kwargs: dict):
+    print(f"> Fetching {name} data {datetime.now().isoformat()}")
+    data = python_callable(**kwargs)
+    print(f"> Retrieved {name} data{datetime.now().isoformat()}")
+    return data
+
+
+def put_data(conn, table_name):
+    drop_table_if_exists(conn, table_name)
+    create_table(conn, table_name)
+
+
+def update_table(conn, table_name, python_callable, kwargs={}):
+    print("=" * 8, "Updating", table_name, "=" * (40 - len(table_name)))
+    data = fetch_data(table_name, python_callable, kwargs)
+    put_data(conn, table_name)
+    print("")
 
 
 def main():
-    table_name = "play_by_play_2023"
-    df = fetch_pbp_data(years=YEARS)
+    # reusable connection
     conn = connect_to_db(file_path=DB_PATH)
-    drop_table_if_exists(conn=conn, table_name=table_name)
-    create_table(conn=conn, table_name=table_name)
-    load_table(conn=conn, table_name=table_name)
-
-    table_name = "player_data"
-    df = fetch_player_data()
-    conn = connect_to_db(file_path=DB_PATH)
-    drop_table_if_exists(conn=conn, table_name=table_name)
-    create_table(conn=conn, table_name=table_name)
-    load_table(conn=conn, table_name=table_name)
+    # Load PBP
+    update_table(
+        conn,
+        "play_by_play_2023",
+        nfl.import_pbp_data,
+        kwargs={"years": YEARS, "downcast": True, "cache": False, "alt_path": None},
+    )
+    # Load Player Data
+    update_table(conn, "player_data", nfl.import_players)
+    # Load Team Data
+    update_table(conn, "team_data", nfl.import_team_desc)
 
 
 if __name__ == "__main__":
