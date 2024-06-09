@@ -7,3 +7,4 @@ sources:
     tables:
       - name: play_by_play_2023
       - name: team_data
+      - name: player_data
