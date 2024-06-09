@@ -1,4 +1,3 @@
-#%%
 import nfl_data_py as nfl
 import duckdb
 from datetime import datetime
