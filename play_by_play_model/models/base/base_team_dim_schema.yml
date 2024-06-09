@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: base_team_data
+  - name: base_team_dim
     description: Play by play data for every NFL game in the 2023 season.
     columns:
       - name: team_id 
