@@ -1,0 +1,373 @@
+Column,Description,Use Case
+play_id,Numeric play id that when used with game_id and drive provides the unique identifier for a single play.,play_fact
+game_id,Ten digit identifier for NFL game.,play_fact
+old_game_id,Legacy NFL game ID.,game_dim
+home_team,String abbreviation for the home team.,game_dim
+away_team,String abbreviation for the away team.,game_dim
+season_type,'REG' or 'POST' indicating if the game belongs to regular or post season.,game_dim
+week,Season week.,game_dim
+posteam,String abbreviation for the team with possession.,play_fact
+posteam_type,String indicating whether the posteam team is home or away.,play_fact
+defteam,String abbreviation for the team on defense.,play_fact
+side_of_field,String abbreviation for which team's side of the field the team with possession is currently on.,play_fact
+yardline_100,Numeric distance in the number of yards from the opponent's endzone for the posteam.,play_fact
+game_date,Date of the game.,game_dim
+quarter_seconds_remaining,Numeric seconds remaining in the quarter.,play_fact
+half_seconds_remaining,Numeric seconds remaining in the half.,play_fact
+game_seconds_remaining,Numeric seconds remaining in the game.,play_fact
+game_half,"String indicating which half the play is in, either Half1, Half2, or Overtime.",play_fact
+quarter_end,Binary indicator for whether or not the row of the data is marking the end of a quarter.,play_fact
+drive,Numeric drive number in the game.,play_fact
+sp,Binary indicator for whether or not a score occurred on the play.,play_fact
+qtr,Quarter of the game (5 is overtime).,play_fact
+down,The down for the given play.,play_fact
+goal_to_go,Binary indicator for whether or not the posteam is in a goal down situation.,play_fact
+time,Time at start of play provided in string format as minutes:seconds remaining in the quarter.,play_fact
+yrdln,String indicating the current field position for a given play.,play_fact
+ydstogo,Numeric yards in distance from either the first down marker or the endzone in goal down situations.,play_fact
+ydsnet,Numeric value for total yards gained on the given drive.,play_fact
+desc,Detailed string description for the given play.,play_fact
+play_type,"String indicating the type of play: pass (includes sacks), run (includes scrambles), punt, field_goal, kickoff, extra_point, qb_kneel, qb_spike, no_play (timeouts and penalties), and missing for rows indicating end of play.",play_fact
+yards_gained,"Numeric yards gained (or lost) by the possessing team, excluding yards gained via fumble recoveries and laterals.",play_fact
+shotgun,Binary indicator for whether or not the play was in shotgun formation.,play_fact
+no_huddle,Binary indicator for whether or not the play was in no_huddle formation.,play_fact
+qb_dropback,"Binary indicator for whether or not the QB dropped back on the play (pass attempt, sack, or scrambled).",play_fact
+qb_kneel,Binary indicator for whether or not the QB took a knee.,play_fact
+qb_spike,Binary indicator for whether or not the QB spiked the ball.,play_fact
+qb_scramble,Binary indicator for whether or not the QB scrambled.,play_fact
+pass_length,String indicator for pass length: short or deep.,play_fact
+pass_location,"String indicator for pass location: left, middle, or right.",play_fact
+air_yards,Numeric value for distance in yards perpendicular to the line of scrimmage at where the targeted receiver either caught or didn't catch the ball.,play_fact
+yards_after_catch,Numeric value for distance in yards perpendicular to the yard line where the receiver made the reception to where the play ended.,play_fact
+run_location,"String indicator for location of run: left, middle, or right.",play_fact
+run_gap,"String indicator for line gap of run: end, guard, or tackle",play_fact
+field_goal_result,"String indicator for result of field goal attempt: made, missed, or blocked.",play_fact
+kick_distance,"Numeric distance in yards for kickoffs, field goals, and punts.",play_fact
+extra_point_result,"String indicator for the result of the extra point attempt: good, failed, blocked, safety (touchback in defensive endzone is 1 point apparently), or aborted.",play_fact
+two_point_conv_result,"String indicator for result of two point conversion attempt: success, failure, safety (touchback in defensive endzone is 1 point apparently), or return.",play_fact
+home_timeouts_remaining,Numeric timeouts remaining in the half for the home team.,play_fact
+away_timeouts_remaining,Numeric timeouts remaining in the half for the away team.,play_fact
+timeout,Binary indicator for whether or not a timeout was called by either team.,play_fact
+timeout_team,String abbreviation for which team called the timeout.,play_fact
+td_team,String abbreviation for which team scored the touchdown.,play_fact
+td_player_name,String name of the player who scored a touchdown.,play_fact
+td_player_id,Unique identifier of the player who scored a touchdown.,play_fact
+posteam_timeouts_remaining,Number of timeouts remaining for the possession team.,play_fact
+defteam_timeouts_remaining,Number of timeouts remaining for the team on defense.,play_fact
+total_home_score,Score for the home team at the end of the play.,play_fact
+total_away_score,Score for the away team at the end of the play.,play_fact
+posteam_score,Score the posteam at the start of the play.,play_fact
+defteam_score,Score the defteam at the start of the play.,play_fact
+score_differential,Score differential between the posteam and defteam at the start of the play.,play_fact
+posteam_score_post,Score for the posteam at the end of the play.,play_fact
+defteam_score_post,Score for the defteam at the end of the play.,play_fact
+score_differential_post,Score differential between the posteam and defteam at the end of the play.,play_fact
+no_score_prob,Predicted probability of no score occurring for the rest of the half based on the expected points model.,delete
+opp_fg_prob,Predicted probability of the defteam scoring a FG next.,delete
+opp_safety_prob,Predicted probability of the defteam scoring a safety next.,delete
+opp_td_prob,Predicted probability of the defteam scoring a TD next.,delete
+fg_prob,Predicted probability of the posteam scoring a FG next.,delete
+safety_prob,Predicted probability of the posteam scoring a safety next.,delete
+td_prob,Predicted probability of the posteam scoring a TD next.,delete
+extra_point_prob,Predicted probability of the posteam scoring an extra point.,delete
+two_point_conversion_prob,Predicted probability of the posteam scoring the two point conversion.,delete
+ep,"Using the scoring event probabilities, the estimated expected points with respect to the possession team for the given play.",delete
+epa,Expected points added (EPA) by the posteam for the given play.,delete
+total_home_epa,Cumulative total EPA for the home team in the game so far.,delete
+total_away_epa,Cumulative total EPA for the away team in the game so far.,delete
+total_home_rush_epa,Cumulative total rushing EPA for the home team in the game so far.,delete
+total_away_rush_epa,Cumulative total rushing EPA for the away team in the game so far.,delete
+total_home_pass_epa,Cumulative total passing EPA for the home team in the game so far.,delete
+total_away_pass_epa,Cumulative total passing EPA for the away team in the game so far.,delete
+air_epa,EPA from the air yards alone. For completions this represents the actual value provided through the air. For incompletions this represents the hypothetical value that could've been added through the air if the pass was completed.,delete
+yac_epa,EPA from the yards after catch alone. For completions this represents the actual value provided after the catch. For incompletions this represents the difference between the hypothetical air_epa and the play's raw observed EPA (how much the incomplete pass cost the posteam).,delete
+comp_air_epa,EPA from the air yards alone only for completions.,delete
+comp_yac_epa,EPA from the yards after catch alone only for completions.,delete
+total_home_comp_air_epa,Cumulative total completions air EPA for the home team in the game so far.,delete
+total_away_comp_air_epa,Cumulative total completions air EPA for the away team in the game so far.,delete
+total_home_comp_yac_epa,Cumulative total completions yac EPA for the home team in the game so far.,delete
+total_away_comp_yac_epa,Cumulative total completions yac EPA for the away team in the game so far.,delete
+total_home_raw_air_epa,Cumulative total raw air EPA for the home team in the game so far.,delete
+total_away_raw_air_epa,Cumulative total raw air EPA for the away team in the game so far.,delete
+total_home_raw_yac_epa,Cumulative total raw yac EPA for the home team in the game so far.,delete
+total_away_raw_yac_epa,Cumulative total raw yac EPA for the away team in the game so far.,delete
+wp,Estimated win probabiity for the posteam given the current situation at the start of the given play.,delete
+def_wp,Estimated win probability for the defteam.,delete
+home_wp,Estimated win probability for the home team.,delete
+away_wp,Estimated win probability for the away team.,delete
+wpa,Win probability added (WPA) for the posteam.,delete
+vegas_wpa,Win probability added (WPA) for the posteam: spread_adjusted model.,delete
+vegas_home_wpa,Win probability added (WPA) for the home team: spread_adjusted model.,delete
+home_wp_post,Estimated win probability for the home team at the end of the play.,delete
+away_wp_post,Estimated win probability for the away team at the end of the play.,delete
+vegas_wp,"Estimated win probabiity for the posteam given the current situation at the start of the given play, incorporating pre-game Vegas line.",delete
+vegas_home_wp,Estimated win probability for the home team incorporating pre-game Vegas line.,delete
+total_home_rush_wpa,Cumulative total rushing WPA for the home team in the game so far.,delete
+total_away_rush_wpa,Cumulative total rushing WPA for the away team in the game so far.,delete
+total_home_pass_wpa,Cumulative total passing WPA for the home team in the game so far.,delete
+total_away_pass_wpa,Cumulative total passing WPA for the away team in the game so far.,delete
+air_wpa,WPA through the air (same logic as air_epa).,delete
+yac_wpa,WPA from yards after the catch (same logic as yac_epa).,delete
+comp_air_wpa,The air_wpa for completions only.,delete
+comp_yac_wpa,The yac_wpa for completions only.,delete
+total_home_comp_air_wpa,Cumulative total completions air WPA for the home team in the game so far.,delete
+total_away_comp_air_wpa,Cumulative total completions air WPA for the away team in the game so far.,delete
+total_home_comp_yac_wpa,Cumulative total completions yac WPA for the home team in the game so far.,delete
+total_away_comp_yac_wpa,Cumulative total completions yac WPA for the away team in the game so far.,delete
+total_home_raw_air_wpa,Cumulative total raw air WPA for the home team in the game so far.,delete
+total_away_raw_air_wpa,Cumulative total raw air WPA for the away team in the game so far.,delete
+total_home_raw_yac_wpa,Cumulative total raw yac WPA for the home team in the game so far.,delete
+total_away_raw_yac_wpa,Cumulative total raw yac WPA for the away team in the game so far.,delete
+punt_blocked,Binary indicator for if the punt was blocked.,play_fact
+first_down_rush,Binary indicator for if a running play converted the first down.,play_fact
+first_down_pass,Binary indicator for if a passing play converted the first down.,play_fact
+first_down_penalty,Binary indicator for if a penalty converted the first down.,play_fact
+third_down_converted,Binary indicator for if the first down was converted on third down.,play_fact
+third_down_failed,Binary indicator for if the posteam failed to convert first down on third down.,play_fact
+fourth_down_converted,Binary indicator for if the first down was converted on fourth down.,play_fact
+fourth_down_failed,Binary indicator for if the posteam failed to convert first down on fourth down.,play_fact
+incomplete_pass,Binary indicator for if the pass was incomplete.,play_fact
+touchback,Binary indicator for if a touchback occurred on the play.,play_fact
+interception,Binary indicator for if the pass was intercepted.,play_fact
+punt_inside_twenty,Binary indicator for if the punt ended inside the twenty yard line.,play_fact
+punt_in_endzone,Binary indicator for if the punt was in the endzone.,play_fact
+punt_out_of_bounds,Binary indicator for if the punt went out of bounds.,play_fact
+punt_downed,Binary indicator for if the punt was downed.,play_fact
+punt_fair_catch,Binary indicator for if the punt was caught with a fair catch.,play_fact
+kickoff_inside_twenty,Binary indicator for if the kickoff ended inside the twenty yard line.,play_fact
+kickoff_in_endzone,Binary indicator for if the kickoff was in the endzone.,play_fact
+kickoff_out_of_bounds,Binary indicator for if the kickoff went out of bounds.,play_fact
+kickoff_downed,Binary indicator for if the kickoff was downed.,play_fact
+kickoff_fair_catch,Binary indicator for if the kickoff was caught with a fair catch.,play_fact
+fumble_forced,Binary indicator for if the fumble was forced.,play_fact
+fumble_not_forced,Binary indicator for if the fumble was not forced.,play_fact
+fumble_out_of_bounds,Binary indicator for if the fumble went out of bounds.,play_fact
+solo_tackle,Binary indicator if the play had a solo tackle (could be multiple due to fumbles).,play_fact
+safety,Binary indicator for whether or not a safety occurred.,play_fact
+penalty,Binary indicator for whether or not a penalty occurred.,play_fact
+tackled_for_loss,Binary indicator for whether or not a tackle for loss on a run play occurred.,play_fact
+fumble_lost,Binary indicator for if the fumble was lost.,play_fact
+own_kickoff_recovery,Binary indicator for if the kicking team recovered the kickoff.,play_fact
+own_kickoff_recovery_td,Binary indicator for if the kicking team recovered the kickoff and scored a TD.,play_fact
+qb_hit,Binary indicator if the QB was hit on the play.,play_fact
+rush_attempt,Binary indicator for if the play was a run.,play_fact
+pass_attempt,Binary indicator for if the play was a pass attempt (includes sacks).,play_fact
+sack,Binary indicator for if the play ended in a sack.,play_fact
+touchdown,Binary indicator for if the play resulted in a TD.,play_fact
+pass_touchdown,Binary indicator for if the play resulted in a passing TD.,play_fact
+rush_touchdown,Binary indicator for if the play resulted in a rushing TD.,play_fact
+return_touchdown,Binary indicator for if the play resulted in a return TD.,play_fact
+extra_point_attempt,Binary indicator for extra point attempt.,play_fact
+two_point_attempt,Binary indicator for two point conversion attempt.,play_fact
+field_goal_attempt,Binary indicator for field goal attempt.,play_fact
+kickoff_attempt,Binary indicator for kickoff.,play_fact
+punt_attempt,Binary indicator for punts.,play_fact
+fumble,Binary indicator for if a fumble occurred.,play_fact
+complete_pass,Binary indicator for if the pass was completed.,play_fact
+assist_tackle,Binary indicator for if an assist tackle occurred.,play_fact
+lateral_reception,Binary indicator for if a lateral occurred on the reception.,play_fact
+lateral_rush,Binary indicator for if a lateral occurred on a run.,play_fact
+lateral_return,Binary indicator for if a lateral occurred on a return.,play_fact
+lateral_recovery,Binary indicator for if a lateral occurred on a fumble recovery.,play_fact
+passer_player_id,Unique identifier for the player that attempted the pass.,play_fact
+passer_player_name,String name for the player that attempted the pass.,delete
+passing_yards,"Numeric yards by the passer_player_name, including yards gained in pass plays with laterals. This should equal official passing statistics.",play_fact
+receiver_player_id,Unique identifier for the receiver that was targeted on the pass.,play_fact
+receiver_player_name,String name for the targeted receiver.,delete
+receiving_yards,"Numeric yards by the receiver_player_name, excluding yards gained in pass plays with laterals. This should equal official receiving statistics but could miss yards gained in pass plays with laterals. Please see the description of `lateral_receiver_player_name` for further information.",play_fact
+rusher_player_id,Unique identifier for the player that attempted the run.,play_fact
+rusher_player_name,String name for the player that attempted the run.,delete
+rushing_yards,"Numeric yards by the rusher_player_name, excluding yards gained in rush plays with laterals. This should equal official rushing statistics but could miss yards gained in rush plays with laterals. Please see the description of `lateral_rusher_player_name` for further information.",play_fact
+lateral_receiver_player_id,Unique identifier for the player that received the last(!) lateral on a pass play.,play_fact
+lateral_receiver_player_name,"String name for the player that received the last(!) lateral on a pass play. If there were multiple laterals in the same play, this will only be the last player who received a lateral. Please see <https://github.com/mrcaseb/nfl-data/tree/master/data/lateral_yards> for a list of plays where multiple players recorded lateral receiving yards.",delete
+lateral_receiving_yards,Numeric yards by the `lateral_receiver_player_name` in pass plays with laterals. Please see the description of `lateral_receiver_player_name` for further information.,play_fact
+lateral_rusher_player_id,Unique identifier for the player that received the last(!) lateral on a run play.,play_fact
+lateral_rusher_player_name,"String name for the player that received the last(!) lateral on a run play. If there were multiple laterals in the same play, this will only be the last player who received a lateral. Please see <https://github.com/mrcaseb/nfl-data/tree/master/data/lateral_yards> for a list of plays where multiple players recorded lateral rushing yards.",delete
+lateral_rushing_yards,Numeric yards by the `lateral_rusher_player_name` in run plays with laterals. Please see the description of `lateral_rusher_player_name` for further information.,play_fact
+lateral_sack_player_id,Unique identifier for the player that received the lateral on a sack.,play_fact
+lateral_sack_player_name,String name for the player that received the lateral on a sack.,delete
+interception_player_id,Unique identifier for the player that intercepted the pass.,play_fact
+interception_player_name,String name for the player that intercepted the pass.,delete
+lateral_interception_player_id,Unique indentifier for the player that received the lateral on an interception.,play_fact
+lateral_interception_player_name,String name for the player that received the lateral on an interception.,delete
+punt_returner_player_id,Unique identifier for the punt returner.,play_fact
+punt_returner_player_name,String name for the punt returner.,delete
+lateral_punt_returner_player_id,Unique identifier for the player that received the lateral on a punt return.,play_fact
+lateral_punt_returner_player_name,String name for the player that received the lateral on a punt return.,delete
+kickoff_returner_player_name,String name for the kickoff returner.,delete
+kickoff_returner_player_id,Unique identifier for the kickoff returner.,play_fact
+lateral_kickoff_returner_player_id,Unique identifier for the player that received the lateral on a kickoff return.,play_fact
+lateral_kickoff_returner_player_name,String name for the player that received the lateral on a kickoff return.,delete
+punter_player_id,Unique identifier for the punter.,play_fact
+punter_player_name,String name for the punter.,delete
+kicker_player_name,String name for the kicker on FG or kickoff.,delete
+kicker_player_id,Unique identifier for the kicker on FG or kickoff.,play_fact
+own_kickoff_recovery_player_id,Unique identifier for the player that recovered their own kickoff.,play_fact
+own_kickoff_recovery_player_name,String name for the player that recovered their own kickoff.,delete
+blocked_player_id,Unique identifier for the player that blocked the punt or FG.,play_fact
+blocked_player_name,String name for the player that blocked the punt or FG.,delete
+tackle_for_loss_1_player_id,Unique identifier for one of the potential players with the tackle for loss.,play_fact
+tackle_for_loss_1_player_name,String name for one of the potential players with the tackle for loss.,delete
+tackle_for_loss_2_player_id,Unique identifier for one of the potential players with the tackle for loss.,play_fact
+tackle_for_loss_2_player_name,String name for one of the potential players with the tackle for loss.,delete
+qb_hit_1_player_id,Unique identifier for one of the potential players that hit the QB. No sack as the QB was not the ball carrier. For sacks please see `sack_player` or `half_sack_*_player`.,play_fact
+qb_hit_1_player_name,String name for one of the potential players that hit the QB. No sack as the QB was not the ball carrier. For sacks please see `sack_player` or `half_sack_*_player`.,delete
+qb_hit_2_player_id,Unique identifier for one of the potential players that hit the QB. No sack as the QB was not the ball carrier. For sacks please see `sack_player` or `half_sack_*_player`.,play_fact
+qb_hit_2_player_name,String name for one of the potential players that hit the QB. No sack as the QB was not the ball carrier. For sacks please see `sack_player` or `half_sack_*_player`.,delete
+forced_fumble_player_1_team,Team of one of the players with a forced fumble.,play_fact
+forced_fumble_player_1_player_id,Unique identifier of one of the players with a forced fumble.,play_fact
+forced_fumble_player_1_player_name,String name of one of the players with a forced fumble.,delete
+forced_fumble_player_2_team,Team of one of the players with a forced fumble.,play_fact
+forced_fumble_player_2_player_id,Unique identifier of one of the players with a forced fumble.,play_fact
+forced_fumble_player_2_player_name,String name of one of the players with a forced fumble.,delete
+solo_tackle_1_team,Team of one of the players with a solo tackle.,play_fact
+solo_tackle_2_team,Team of one of the players with a solo tackle.,play_fact
+solo_tackle_1_player_id,Unique identifier of one of the players with a solo tackle.,play_fact
+solo_tackle_2_player_id,Unique identifier of one of the players with a solo tackle.,play_fact
+solo_tackle_1_player_name,String name of one of the players with a solo tackle.,delete
+solo_tackle_2_player_name,String name of one of the players with a solo tackle.,delete
+assist_tackle_1_player_id,Unique identifier of one of the players with a tackle assist.,play_fact
+assist_tackle_1_player_name,String name of one of the players with a tackle assist.,delete
+assist_tackle_1_team,Team of one of the players with a tackle assist.,play_fact
+assist_tackle_2_player_id,Unique identifier of one of the players with a tackle assist.,play_fact
+assist_tackle_2_player_name,String name of one of the players with a tackle assist.,delete
+assist_tackle_2_team,Team of one of the players with a tackle assist.,play_fact
+assist_tackle_3_player_id,Unique identifier of one of the players with a tackle assist.,play_fact
+assist_tackle_3_player_name,String name of one of the players with a tackle assist.,delete
+assist_tackle_3_team,Team of one of the players with a tackle assist.,play_fact
+assist_tackle_4_player_id,Unique identifier of one of the players with a tackle assist.,play_fact
+assist_tackle_4_player_name,String name of one of the players with a tackle assist.,delete
+assist_tackle_4_team,Team of one of the players with a tackle assist.,play_fact
+tackle_with_assist,Binary indicator for if there has been a tackle with assist.,play_fact
+tackle_with_assist_1_player_id,Unique identifier of one of the players with a tackle with assist.,play_fact
+tackle_with_assist_1_player_name,String name of one of the players with a tackle with assist.,delete
+tackle_with_assist_1_team,Team of one of the players with a tackle with assist.,play_fact
+tackle_with_assist_2_player_id,Unique identifier of one of the players with a tackle with assist.,play_fact
+tackle_with_assist_2_player_name,String name of one of the players with a tackle with assist.,delete
+tackle_with_assist_2_team,Team of one of the players with a tackle with assist.,play_fact
+pass_defense_1_player_id,Unique identifier of one of the players with a pass defense.,play_fact
+pass_defense_1_player_name,String name of one of the players with a pass defense.,delete
+pass_defense_2_player_id,Unique identifier of one of the players with a pass defense.,play_fact
+pass_defense_2_player_name,String name of one of the players with a pass defense.,delete
+fumbled_1_team,Team of one of the first player with a fumble.,play_fact
+fumbled_1_player_id,Unique identifier of the first player who fumbled on the play.,play_fact
+fumbled_1_player_name,String name of one of the first player who fumbled on the play.,delete
+fumbled_2_player_id,Unique identifier of the second player who fumbled on the play.,play_fact
+fumbled_2_player_name,String name of one of the second player who fumbled on the play.,delete
+fumbled_2_team,Team of one of the second player with a fumble.,play_fact
+fumble_recovery_1_team,Team of one of the players with a fumble recovery.,play_fact
+fumble_recovery_1_yards,Yards gained by one of the players with a fumble recovery.,play_fact
+fumble_recovery_1_player_id,Unique identifier of one of the players with a fumble recovery.,play_fact
+fumble_recovery_1_player_name,String name of one of the players with a fumble recovery.,delete
+fumble_recovery_2_team,Team of one of the players with a fumble recovery.,play_fact
+fumble_recovery_2_yards,Yards gained by one of the players with a fumble recovery.,play_fact
+fumble_recovery_2_player_id,Unique identifier of one of the players with a fumble recovery.,play_fact
+fumble_recovery_2_player_name,String name of one of the players with a fumble recovery.,delete
+sack_player_id,Unique identifier of the player who recorded a solo sack.,play_fact
+sack_player_name,String name of the player who recorded a solo sack.,delete
+half_sack_1_player_id,Unique identifier of the first player who recorded half a sack.,play_fact
+half_sack_1_player_name,String name of the first player who recorded half a sack.,delete
+half_sack_2_player_id,Unique identifier of the second player who recorded half a sack.,play_fact
+half_sack_2_player_name,String name of the second player who recorded half a sack.,delete
+return_team,String abbreviation of the return team.,play_fact
+return_yards,Yards gained by the return team.,play_fact
+penalty_team,String abbreviation of the team with the penalty.,play_fact
+penalty_player_id,Unique identifier for the player with the penalty.,play_fact
+penalty_player_name,String name for the player with the penalty.,delete
+penalty_yards,Yards gained (or lost) by the posteam from the penalty.,play_fact
+replay_or_challenge,Binary indicator for whether or not a replay or challenge.,play_fact
+replay_or_challenge_result,String indicating the result of the replay or challenge.,play_fact
+penalty_type,String indicating the penalty type of the first penalty in the given play. Will be `NA` if `desc` is missing the type.,play_fact
+defensive_two_point_attempt,"Binary indicator whether or not the defense was able to have an attempt on a two point conversion, this results following a turnover.",play_fact
+defensive_two_point_conv,Binary indicator whether or not the defense successfully scored on the two point conversion.,play_fact
+defensive_extra_point_attempt,"Binary indicator whether or not the defense was able to have an attempt on an extra point attempt, this results following a blocked attempt that the defense recovers the ball.",play_fact
+defensive_extra_point_conv,Binary indicator whether or not the defense successfully scored on an extra point attempt.,play_fact
+safety_player_name,String name for the player who scored a safety.,delete
+safety_player_id,Unique identifier for the player who scored a safety.,play_fact
+season,4 digit number indicating to which season the game belongs to.,game_dim
+cp,Numeric value indicating the probability for a complete pass based on comparable game situations.,delete
+cpoe,For a single pass play this is 1 - cp when the pass was completed or 0 - cp when the pass was incomplete. Analyzed for a whole game or season an indicator for the passer how much over or under expectation his completion percentage was.,delete
+series,"Starts at 1, each new first down increments, numbers shared across both teams NA: kickoffs, extra point/two point conversion attempts, non-plays, no posteam",play_fact
+series_success,"1: scored touchdown, gained enough yards for first down.",drive_dim
+series_result,"Possible values: First down, Touchdown, Opp touchdown, Field goal, Missed field goal, Safety, Turnover, Punt, Turnover on downs, QB kneel, End of half",drive_dim
+order_sequence,"Column provided by NFL to fix out-of-order plays. Available 2011 and beyond with source ""nfl"".",play_fact
+start_time,Kickoff time in eastern time zone.,game_dim
+time_of_day,"Time of day of play in UTC ""HH:MM:SS"" format. Available 2011 and beyond with source ""nfl"".",game_dim
+stadium,Game site name.,game_dim
+weather,"String describing the weather including temperature, humidity and wind (direction and speed). Doesn't change during the game!",game_dim
+nfl_api_id,UUID of the game in the new NFL API.,unknown
+play_clock,Time on the playclock when the ball was snapped.,play_fact
+play_deleted,Binary indicator for deleted plays.,unknown
+play_type_nfl,Play type as listed in the NFL source. Slightly different to the regular play_type variable.,play_fact
+special_teams_play,"Binary indicator for whether play is special teams play from NFL source. Available 2011 and beyond with source ""nfl"".",play_fact
+st_play_type,"Type of special teams play from NFL source. Available 2011 and beyond with source ""nfl"".",play_fact
+end_clock_time,Game time at the end of a given play.,play_fact
+end_yard_line,String indicating the yardline at the end of the given play consisting of team half and yard line number.,play_fact
+fixed_drive,Manually created drive number in a game.,drive_dim
+fixed_drive_result,Manually created drive result.,drive_dim
+drive_real_start_time,Local day time when the drive started (currently not used by the NFL and therefore mostly 'NA').,drive_dim
+drive_play_count,Numeric value of how many regular plays happened in a given drive.,drive_dim
+drive_time_of_possession,Time of possession in a given drive.,drive_dim
+drive_first_downs,Number of forst downs in a given drive.,drive_dim
+drive_inside20,Binary indicator if the offense was able to get inside the opponents 20 yard line.,drive_dim
+drive_ended_with_score,Binary indicator the drive ended with a score.,drive_dim
+drive_quarter_start,Numeric value indicating in which quarter the given drive has started.,drive_dim
+drive_quarter_end,Numeric value indicating in which quarter the given drive has ended.,drive_dim
+drive_yards_penalized,Numeric value of how many yards the offense gained or lost through penalties in the given drive.,drive_dim
+drive_start_transition,String indicating how the offense got the ball.,drive_dim
+drive_end_transition,String indicating how the offense lost the ball.,drive_dim
+drive_game_clock_start,Game time at the beginning of a given drive.,drive_dim
+drive_game_clock_end,Game time at the end of a given drive.,drive_dim
+drive_start_yard_line,String indicating where a given drive started consisting of team half and yard line number.,drive_dim
+drive_end_yard_line,String indicating where a given drive ended consisting of team half and yard line number.,drive_dim
+drive_play_id_started,Play_id of the first play in the given drive.,drive_dim
+drive_play_id_ended,Play_id of the last play in the given drive.,drive_dim
+away_score,Total points scored by the away team.,play_fact
+home_score,Total points scored by the home team.,play_fact
+location,Either 'Home' o 'Neutral' indicating if the home team played at home or at a neutral site.,game_dim
+result,Equals home_score - away_score and means the game outcome from the perspective of the home team.,game_dim
+total,Equals home_score + away_score and means the total points scored in the given game.,game_dim
+spread_line,"The closing spread line for the game. A positive number means the home team was favored by that many points, a negative number means the away team was favored by that many points. (Source: Pro-Football-Reference)",game_dim
+total_line,The closing total line for the game. (Source: Pro-Football-Reference),game_dim
+div_game,Binary indicator for if the given game was a division game.,game_dim
+roof,"One of 'dome', 'outdoors', 'closed', 'open' indicating indicating the roof status of the stadium the game was played in. (Source: Pro-Football-Reference)",game_dim
+surface,What type of ground the game was played on. (Source: Pro-Football-Reference),game_dim
+temp,The temperature at the stadium only for 'roof' = 'outdoors' or 'open'.(Source: Pro-Football-Reference),game_dim
+wind,The speed of the wind in miles/hour only for 'roof' = 'outdoors' or 'open'. (Source: Pro-Football-Reference),game_dim
+home_coach,First and last name of the home team coach. (Source: Pro-Football-Reference),game_dim
+away_coach,First and last name of the away team coach. (Source: Pro-Football-Reference),game_dim
+stadium_id,ID of the stadium the game was played in. (Source: Pro-Football-Reference),game_dim
+game_stadium,Name of the stadium the game was played in. (Source: Pro-Football-Reference),game_dim
+success,Binary indicator wheter epa > 0 in the given play.,delete
+passer,Name of the dropback player (scrambles included) including plays with penalties.,delete
+passer_jersey_number,Jersey number of the passer.,delete
+rusher,Name of the rusher (no scrambles) including plays with penalties.,delete
+rusher_jersey_number,Jersey number of the rusher.,delete
+receiver,Name of the receiver including plays with penalties.,delete
+receiver_jersey_number,Jersey number of the receiver.,delete
+pass,Binary indicator if the play was a pass play (sacks and scrambles included).,play_fact
+rush,Binary indicator if the play was a rushing play.,play_fact
+first_down,Binary indicator if the play ended in a first down.,play_fact
+aborted_play,"Binary indicator if the play description indicates ""Aborted"".",play_fact
+special,Binary indicator if the play was a special teams play.,play_fact
+play,"Binary indicator: 1 if the play was a 'normal' play (including penalties), 0 otherwise.",play_fact
+passer_id,ID of the player in the 'passer' column.,play_fact
+rusher_id,ID of the player in the 'rusher' column.,play_fact
+receiver_id,ID of the player in the 'receiver' column.,play_fact
+name,"Name of the 'passer' if it is not 'NA', or name of the 'rusher' otherwise.",play_fact
+jersey_number,Jersey number of the player listed in the 'name' column.,delete
+id,ID of the player in the 'name' column.,play_fact
+fantasy_player_name,Name of the rusher on rush plays or receiver on pass plays (from official stats).,delete
+fantasy_player_id,ID of the rusher on rush plays or receiver on pass plays (from official stats).,play_fact
+fantasy,Name of the rusher on rush plays or receiver on pass plays.,delete
+fantasy_id,ID of the rusher on rush plays or receiver on pass plays.,play_fact
+out_of_bounds,"1 if play description contains ran ob, pushed ob, or sacked ob; 0 otherwise.",play_fact
+home_opening_kickoff,"= 1 if the home team received the opening kickoff, 0 otherwise.",game_dim
+qb_epa,Gives QB credit for EPA for up to the point where a receiver lost a fumble after a completed catch and makes EPA work more like passing yards on plays with fumbles.,delete
+xyac_epa,"Expected value of EPA gained after the catch, starting from where the catch was made. Zero yards after the catch would be listed as zero EPA.",delete
+xyac_mean_yardage,Average expected yards after the catch based on where the ball was caught.,delete
+xyac_median_yardage,Median expected yards after the catch based on where the ball was caught.,delete
+xyac_success,Probability play earns positive EPA (relative to where play started) based on where ball was caught.,delete
+xyac_fd,Probability play earns a first down based on where the ball was caught.,delete
+xpass,Probability of dropback scaled from 0 to 1.,delete
+pass_oe,Dropback percent over expected on a given play scaled from 0 to 100.,delete
