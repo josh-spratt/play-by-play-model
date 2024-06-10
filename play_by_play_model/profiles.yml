@@ -1,0 +1,8 @@
+play_by_play_model:
+  outputs:
+    prod:
+      type: duckdb
+      path: "{{ env_var('HOME') }}/.nfl_data/data/fantasy_db.duckdb"
+      threads: 1
+      schema: nfl
+  target: prod

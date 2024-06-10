@@ -1,7 +1,7 @@
 WITH base AS (
     SELECT
         *
-    FROM {{ source('fantasy_db', 'play_by_play_2023') }}
+    FROM {{ source('nfl_stg', 'play_by_play_2023') }}
 )
 
 SELECT

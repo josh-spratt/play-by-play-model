@@ -18,14 +18,32 @@ def connect_to_db(file_path):
         return duckdb.connect(file_path)
 
 
+def create_schema_if_not_exists(conn, schema_name):
+    sql = """
+        select
+            schema_name
+        from
+            information_schema.schemata
+        group by
+            schema_name;
+    """
+    results = [item[0] for item in conn.sql(sql).fetchall()]
+    if schema_name in results:
+        print("Schema already exists")
+        return None
+    else:
+        print(f"creating schema {schema_name}")
+        conn.sql(f"create schema {schema_name};")
+
+
 def drop_table_if_exists(conn, table_name):
     sql = """
         select
-            table_name
+            table_schema || '.' || table_name
         from
             information_schema.tables
         group by
-            table_name;
+            table_schema || '.' || table_name;
     """
     results = [item[0] for item in conn.sql(sql).fetchall()]
     if table_name in results:
@@ -63,17 +81,20 @@ def update_table(conn, table_name, python_callable, kwargs={}):
 def main():
     # reusable connection
     conn = connect_to_db(file_path=DB_PATH)
+    # create schemas if they don't exist
+    create_schema_if_not_exists(conn, "nfl_stg")
+    create_schema_if_not_exists(conn, "nfl_rpt")
     # Load PBP
     update_table(
         conn,
-        "play_by_play_2023",
+        "nfl_stg.play_by_play_2023",
         nfl.import_pbp_data,
         kwargs={"years": YEARS, "downcast": True, "cache": False, "alt_path": None},
     )
     # Load Player Data
-    update_table(conn, "player_data", nfl.import_players)
+    update_table(conn, "nfl_stg.player_data", nfl.import_players)
     # Load Team Data
-    update_table(conn, "team_data", nfl.import_team_desc)
+    update_table(conn, "nfl_stg.team_data", nfl.import_team_desc)
 
 
 if __name__ == "__main__":

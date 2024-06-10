@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: fantasy_db
+  - name: nfl_stg
     database: fantasy_db  
-    schema: main  
+    schema: nfl_stg  
     tables:
       - name: play_by_play_2023
       - name: team_data
