@@ -14,7 +14,7 @@ SELECT DISTINCT
 	,total::numeric total_score
 	,spread_line::numeric spread_line
 	,total_line::numeric total_line
-	,div_game::numeric div_game
+	,CASE WHEN div_game = 1 THEN TRUE ELSE FALSE END div_game
 	,roof::varchar roof_type
 	,surface::varchar surface_type
 	,temp::numeric temperature
@@ -23,5 +23,5 @@ SELECT DISTINCT
 	,away_coach::varchar awaycoach
 	,stadium_id::varchar stadium_id
 	,game_stadium::varchar game_stadium
-	,home_opening_kickoff::numeric home_opening_kickoff
+	,CASE WHEN home_opening_kickoff = 1 THEN TRUE ELSE FALSE END home_opening_kickoff
 FROM nfl_stg.base_play_by_play_2023
