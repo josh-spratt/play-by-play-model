@@ -1,7 +1,7 @@
 WITH base AS (
     SELECT
         *
-    FROM {{ source('fantasy_db', 'player_data') }}
+    FROM {{ source('nfl_stg', 'player_data') }}
 )
 
 SELECT

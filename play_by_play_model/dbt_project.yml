@@ -34,3 +34,9 @@ models:
     +persist_docs:
       relation: true
       columns: true
+    staging:
+      +schema: stg
+    base:
+      +schema: stg
+    reporting:
+      +schema: rpt
