@@ -1,27 +1,27 @@
 SELECT DISTINCT
-	md5(home_team||away_team||game_date) game_sk
-	,home_team
-	,away_team
-	,season_type
-	,week
-	,game_date
-	,season
-	,start_time
-	,stadium
-	,weather
-	,location
-	,result
-	,total
-	,spread_line
-	,total_line
-	,div_game
-	,roof
-	,surface
-	,temp
-	,wind
-	,home_coach
-	,away_coach
-	,stadium_id
-	,game_stadium
-	,home_opening_kickoff
+	md5(home_team||away_team||game_date)::varchar game_sk
+	,home_team::varchar home_team_abbr
+	,away_team::varchar away_team_abbr
+	,season_type::varchar season_type
+	,week::numeric "week"
+	,game_date::date game_date
+	,season::numeric season
+	,try_strptime(start_time,'%m/%d/%y, %H:%M:%S') start_time
+	,stadium::varchar stadium
+	,weather::varchar weather
+	,location::varchar "location"
+	,result::numeric result
+	,total::numeric total_score
+	,spread_line::numeric spread_line
+	,total_line::numeric total_line
+	,div_game::numeric div_game
+	,roof::varchar roof_type
+	,surface::varchar surface_type
+	,temp::numeric temperature
+	,wind::numeric wind_speed
+	,home_coach::varchar home_coach
+	,away_coach::varchar awaycoach
+	,stadium_id::varchar stadium_id
+	,game_stadium::varchar game_stadium
+	,home_opening_kickoff::numeric home_opening_kickoff
 FROM nfl_stg.base_play_by_play_2023
