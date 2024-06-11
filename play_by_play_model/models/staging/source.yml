@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: nfl_stg
+    database: fantasy_db  
+    schema: nfl_stg  
+    tables:
+      - name: game_dim
