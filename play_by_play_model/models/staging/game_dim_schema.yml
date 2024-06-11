@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: game_dim
+    description: Various descriptors about each game with game_sk as the unique id
+    columns:
+      - name: game_sk
+        description: Unique ID for each game, MD5 Hash of home_team, away_team, and game_date
+      - name: home_team
+        description: String abbreviation for the home team.
+      - name: away_team
+        description: String abbreviation for the away team.
+      - name: season_type
+        description: REG or POST indicating if the game belongs to regular or post season.
+      - name: week
+        description: Season week.
+      - name: game_date
+        description: Date of the game.
+      - name: season
+        description: 4 digit number indicating to which season the game belongs to.
+      - name: start_time
+        description: Kickoff time in eastern time zone.
+      - name: time_of_day
+        description: Time of day of play in UTC "HH:MM:SS" format. Available 2011 and beyond with source "nfl".
+      - name: stadium
+        description: Game site name.
+      - name: weather
+        description: String describing the weather including temperature, humidity and wind (direction and speed). Doesn't change during the game!
+      - name: location
+        description: Either 'Home' o 'Neutral' indicating if the home team played at home or at a neutral site.
+      - name: result
+        description: Equals home_score - away_score and means the game outcome from the perspective of the home team.
+      - name: total
+        description: Equals home_score + away_score and means the total points scored in the given game.
+      - name: spread_line
+        description: The closing spread line for the game. A positive number means the home team was favored by that many points, a negative number means the away team was favored by that many points. (Pro-Football-Reference)
+      - name: total_line
+        description: The closing total line for the game. (Pro-Football-Reference)
+      - name: div_game
+        description: Binary indicator for if the given game was a division game.
+      - name: roof
+        description: One of 'dome', 'outdoors', 'closed', 'open' indicating indicating the roof status of the stadium the game was played in. (Pro-Football-Reference)
+      - name: surface
+        description: What type of ground the game was played on. (Pro-Football-Reference)
+      - name: temp
+        description: The temperature at the stadium only for 'roof' = 'outdoors' or 'open'.(Pro-Football-Reference)
+      - name: wind
+        description: The speed of the wind in miles/hour only for 'roof' = 'outdoors' or 'open'. (Pro-Football-Reference)
+      - name: home_coach
+        description: First and last name of the home team coach. (Pro-Football-Reference)
+      - name: away_coach
+        description: First and last name of the away team coach. (Pro-Football-Reference)
+      - name: stadium_id
+        description: ID of the stadium the game was played in. (Pro-Football-Reference)
+      - name: game_stadium
+        description: Name of the stadium the game was played in. (Pro-Football-Reference)
+      - name: home_opening_kickoff
+        description: = 1 if the home team received the opening kickoff, 0 otherwise.
